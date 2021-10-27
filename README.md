@@ -1,17 +1,3 @@
-# ✨ So you want to sponsor a contest
-
-This `README.md` contains a set of checklists for our contest collaboration.
-
-Your contest will use two repos:
-- **a _contest_ repo** (this one), which is used for scoping your contest and for providing information to contestants (wardens)
-- **a _findings_ repo**, where issues are submitted.
-
-Ultimately, when we launch the contest, this contest repo will be made public and will contain the smart contracts to be reviewed and all the information needed for contest participants. The findings repo will be made public after the contest is over and your team has mitigated the identified issues.
-
-Some of the checklists in this doc are for **C4 (🐺)** and some of them are for **you as the contest sponsor (⭐️)**.
-
----
-
 # ⭐️ Slingshot contest details
 - $33,250 worth of ETH main award pot
 - $1,750 worth of ETH gas optimization award pot
@@ -23,7 +9,7 @@ Some of the checklists in this doc are for **C4 (🐺)** and some of them are fo
 
 This repo will be made public before the start of the contest. (C4 delete this line when made public)
 
-## Contracts
+## ✨ Contracts
 ### Slingshot (LOC: 182)
 Slingshot.sol defines the general logic by which a transaction is handled and executed.
 
