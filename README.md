@@ -2,9 +2,9 @@
 
 This `README.md` contains a set of checklists for our contest collaboration.
 
-Your contest will use two repos: 
+Your contest will use two repos:
 - **a _contest_ repo** (this one), which is used for scoping your contest and for providing information to contestants (wardens)
-- **a _findings_ repo**, where issues are submitted. 
+- **a _findings_ repo**, where issues are submitted.
 
 Ultimately, when we launch the contest, this contest repo will be made public and will contain the smart contracts to be reviewed and all the information needed for contest participants. The findings repo will be made public after the contest is over and your team has mitigated the identified issues.
 
@@ -38,7 +38,7 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 - [ ] Any other Twitter handles we can/should tag in (e.g. organizers' personal accounts, etc.)
 - [ ] Your Discord URI
 - [ ] Your website
-- [ ] Optional: Do you have any quirks, recurring themes, iconic tweets, community "secret handshake" stuff we could work in? How do your people recognize each other, for example? 
+- [ ] Optional: Do you have any quirks, recurring themes, iconic tweets, community "secret handshake" stuff we could work in? How do your people recognize each other, for example?
 - [ ] Optional: your logo in Discord emoji format
 
 ---
@@ -70,3 +70,78 @@ Under "SPONSORS ADD INFO HERE" heading below, include the following:
 This repo will be made public before the start of the contest. (C4 delete this line when made public)
 
 [ ⭐️ SPONSORS ADD INFO HERE ]
+## Contracts
+### Slingshot (LOC: 182)
+Slingshot.sol defines the general logic by which a transaction is handled and executed.
+
+The specific logic for each DEX/AMM is defined within its own corresponding module that is stored in the module registry.
+
+Slingshot.sol references these modules to appropriately execute a trade. Slingshot.sol also performs some safety checks to account for slippage and security. Slingshot.sol expect parameters to be passed from the Slingshot backend that provide the details related to how a given transaction should be executed.
+
+#### External calls
+- ApprovalHandler
+- Executioner
+- ModuleRegistry
+#### Libraries used
+- SafeERC20
+- ConcatStrings
+
+### ModuleRegistry (LOC: 76)
+All modules must be registered in ModuleRegistry.sol. Only trusted code can be registered as a module by registry admin.
+
+### ApprovalHandler (LOC: 44)
+It handles all users approvals. It exists to separate the approvals from execution layer. Operated by System admin.
+
+System admin is a multisig and is the most trusted role in the system. It has the power to accept new version of Slingshot protocol and carry over all user approvals.
+
+### Executioner (LOC: 72)
+Creates separate execution environment for trades. Big reason for this contract to exists is to decouple roles of ModuleRegistry.sol admin and System admin.
+
+ModuleRegistry.sol admin should be able to register new modules at will for smooth development process. This role is trusted admin however, he should not be able to introduce any system wide backdoors by registering malicious modules. For example, it should not be possible for a ModuleRegistry.sol admin to abuse user's approvals.
+
+#### External calls
+- BalancerV2ModuleMatic
+- CurveModule
+- SushiSwapModule
+- UniswapModule
+#### Libraries used
+- SafeERC20
+- ConcatStrings
+
+### Adminable (LOC: 24)
+Access control contract based on OpenZeppelin's AccessControl.
+
+### BalancerModule (LOC: 59)
+Trading module for Balancer protocol.
+#### External calls
+- Balancer
+#### Libraries used
+- LibERC20Token
+
+### BalancerV2ModuleMatic (LOC: 72)
+Trading module for BalancerV2 protocol.
+#### External calls
+- BalancerV2
+#### Libraries used
+- LibERC20Token
+
+### CurveModule (LOC: 62)
+Trading module for Curve protocol.
+#### External calls
+- Curve
+#### Libraries used
+- LibERC20Token
+
+### SushiSwapModule (LOC: 13)
+Trading module for SushiSwap protocol.
+#### External calls
+- SushiSwap
+#### Libraries used
+- LibERC20Token
+
+### UniswapModule (LOC: 13)
+Trading module for Uniswap protocol.
+#### External calls
+- Uniswap
+#### Libraries used
+- LibERC20Token
