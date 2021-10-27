@@ -36,7 +36,7 @@ System admin is a multisig and is the most trusted role in the system. It has th
 ### Executioner (LOC: 72)
 Creates separate execution environment for trades. Big reason for this contract to exists is to decouple roles of ModuleRegistry.sol admin and System admin.
 
-ModuleRegistry.sol admin should be able to register new modules at will for smooth development process. This role is trusted admin however, he should not be able to introduce any system wide backdoors by registering malicious modules. For example, it should not be possible for a ModuleRegistry.sol admin to abuse user's approvals.
+ModuleRegistry.sol admin should be able to register new modules at will for smooth development process. This role is trusted admin however, he should not be able to introduce any system wide backdoors by registering malicious modules. For example, it should not be possible for a ModuleRegistry.sol admin to abuse user's approvals given to ApprovalHandler.sol.
 
 #### External calls
 - BalancerV2ModuleMatic
