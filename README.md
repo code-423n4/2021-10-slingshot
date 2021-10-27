@@ -16,6 +16,7 @@ Slingshot.sol defines the general logic by which a transaction is handled and ex
 The specific logic for each DEX/AMM is defined within its own corresponding module that is stored in the module registry.
 
 Slingshot.sol references these modules to appropriately execute a trade. Slingshot.sol also performs some safety checks to account for slippage and security. Slingshot.sol expect parameters to be passed from the Slingshot backend that provide the details related to how a given transaction should be executed.
+
 `rescueTokens` and `rescueTokensFromExecutioner` can be gamed however it is not a concern. They are in place "just in case" and should not be used in the first place.
 
 #### External calls
