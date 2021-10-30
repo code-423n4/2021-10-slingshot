@@ -7,8 +7,6 @@
 - Starts October 30, 2021 00:00 UTC
 - Ends November 1, 2021 23:59 UTC
 
-This repo will be made public before the start of the contest. (C4 delete this line when made public)
-
 ## ✨ Contracts
 ### Slingshot (LOC: 182)
 Slingshot.sol defines the general logic by which a transaction is handled and executed.
